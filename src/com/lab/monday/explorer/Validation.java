@@ -7,7 +7,7 @@ public class Validation
 	{
 		boolean validSelection = true;
 		String[] validEntries =
-		{ "1", "2", "3" };
+		{ "1", "2", "3", "4" };
 
 		for (int i = 0; i < validEntries.length; i++)
 		{
@@ -24,6 +24,6 @@ public class Validation
 		}
 		return validSelection;
 
-	}// method
+	}
 
-}// class
+}

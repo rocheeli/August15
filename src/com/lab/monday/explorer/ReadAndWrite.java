@@ -14,34 +14,20 @@ import java.util.ArrayList;
 
 public class ReadAndWrite
 {
+	static ArrayList<String> countries = new ArrayList<>();
 	Path ourNewPath = Paths.get(
 			"\\Users\\admin\\newworkspace\\AListOfCountries\\src\\com\\lab\\monday\\explorer\\countryListExplorer");
 	File aNewFile = ourNewPath.toFile();
 
-	public String readCountries()
+	public void readCountries()
 	{
-		ArrayList<String> countries = new ArrayList<>();
 
-		try (BufferedReader in = new BufferedReader(new FileReader(aNewFile)))
-		{
-
-			String aCountry;
-			while ((aCountry = in.readLine()) != null)
-			{
-				countries.add(aCountry);
-			}
-			in.close();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 		for (int i = 0; i < countries.size(); i++)
 
 		{
 			System.out.println(countries.get(i));
 
 		}
-		return null;
 	}
 
 	public void writeCountries(String userCountry)
@@ -50,13 +36,42 @@ public class ReadAndWrite
 		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewFile, true))))
 		{
 			out.print(userCountry);
+			countries.add(userCountry);
 			out.close();
 
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+	}
 
-	}// method
+	public void deleteCountries()
+	{
+		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewFile))))
+		{
+			out.print("\n" + countries.get(0));
+			out.close();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(aNewFile, true))))
+		{
+			for (int i = 1; i < (countries.size()) - 1; i++)
+			{
+				out.print(countries.get(i));
+			}
+			out.close();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-}// class
+	public void deleteLastCountryFromArray()
+	{
+		countries.remove(countries.size() - 1);
+		countries.trimToSize();
+
+	}
+}
